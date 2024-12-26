@@ -1,0 +1,26 @@
+<h1>Edit Category</h1>
+
+<%= link_to "Back to Categories", categories_path %>
+
+<div>
+  <%= form_for @category do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :description, class: 'block font-semibold' %>
+      <%= f.text_area :description, class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm' %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :position, class: 'block font-semibold' %>
+      <%= f.number_field :position, class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm' %>
+    </div>
+
+    <div class="form-buttons">
+      <%= f.submit "Update Category", class: 'bg-blue-500 text-white py-2 px-4 rounded' %>
+    </div>
+  <% end %>
+</div>
