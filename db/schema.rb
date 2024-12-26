@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_20_153234) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_25_093420) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -18,6 +26,44 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_153234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "tags_tasks", id: false, force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "task_id", null: false
+    t.index ["tag_id", "task_id"], name: "index_tags_tasks_on_tag_id_and_task_id", unique: true
+    t.index ["task_id", "tag_id"], name: "index_tags_tasks_on_task_id_and_tag_id", unique: true
+  end
+
+  create_table "task_assignments", force: :cascade do |t|
+    t.integer "task_id", null: false
+    t.integer "user_id", null: false
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_assignments_on_task_id"
+    t.index ["user_id"], name: "index_task_assignments_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "position"
+    t.boolean "completed"
+    t.integer "category_id", null: false
+    t.integer "priority"
+    t.datetime "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_tasks_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,4 +75,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_153234) do
   end
 
   add_foreign_key "sessions", "users"
+  add_foreign_key "tags_tasks", "tags"
+  add_foreign_key "tags_tasks", "tasks"
+  add_foreign_key "task_assignments", "tasks"
+  add_foreign_key "task_assignments", "users"
+  add_foreign_key "tasks", "categories"
 end

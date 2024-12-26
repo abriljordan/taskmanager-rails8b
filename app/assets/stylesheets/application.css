@@ -1,41 +1,81 @@
 .container {
     display: grid;
     grid-template: auto 1fr auto / auto 1fr auto; /* Defines three columns */
-    height: 100vh; /* Set the container to fill the full viewport height */
-    width: 1200px; /* Set a fixed width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    overflow: hidden; /* Prevent overflow of contents */
+    height: 100vh; /* Full viewport height */
+    max-width: 1200px; /* Restrict the maximum width */
+    margin: 0 auto; /* Center horizontally */
+    overflow: hidden; /* Prevent overflow */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333; /* Default text color */
+    background: #ffffff; /* Change to white for a cleaner look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
   }
   
   header {
-    background: #4db6ac; /* Soft teal */
-    padding: 0.5rem;
-    grid-column: 1 / 4; /* Header spans all three columns */
+    background: #1d3557; /* Darker blue for a more professional look */
+    color: #ffffff; /* White text for contrast */
+    padding: 1rem;
+    grid-column: 1 / 4; /* Spans all three columns */
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
   }
   
   nav {
-    background: #508982; /* Deeper blue */
+    background: #457b9d; /* Softer blue for the sidebar */
+    color: #ffffff;
     grid-column: 1 / 2; /* Left Sidebar */
-    padding: 2rem;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav li {
+    margin-bottom: 1rem;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #e9c46a; /* Accent color on hover */
   }
   
   main {
-    background: #fff8e1; /* Light beige */
+    background: #ffffff; /* Clean white for readability */
     padding: 2rem;
     grid-column: 2 / 3; /* Main Content */
+    border-left: 1px solid #ccc; /* Lighter border for a softer look */
+    border-right: 1px solid #ccc; /* Lighter border for a softer look */
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
   }
   
   aside {
-    background: #e1bee7; /* Light lavender */
-    padding: 2rem;
+    background: #f1faee; /* Light background for the sidebar */
+    color: #c81414;
+    padding: 2rem 1rem;
     grid-column: 3 / 4; /* Right Sidebar */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   }
   
   footer {
-    background: #cfd8dc; /* Soft gray */
-    padding: 0.5rem;
+    background: #1d3557; /* Match header for consistency */
+    color: #ffffff;
+    padding: 1rem;
     text-align: center;
-    grid-column: 1 / 4; /* Footer spans all three columns */
+    grid-column: 1 / 4; /* Footer spans all columns */
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
   
   ul {
@@ -46,16 +86,36 @@
   a {
     text-decoration: none;
     color: #333;
+    transition: color 0.3s ease;
   }
   
-  /* media queries for responsiveness */
+  a:hover {
+    color: #2a9d8f; /* Hover color for links */
+  }
+  
+  /* Responsive adjustments */
   @media (max-width: 768px) {
     .container {
       grid-template: auto 1fr auto / auto; /* Single column layout */
     }
+  
+    nav, aside {
+      display: none; /* Keep sidebars hidden for small screens */
+    }
+  
+    main {
+      grid-column: 1 / -1; /* Main content spans full width */
+      border: none;
+    }
   }
+  
   @media (max-width: 480px) {
-    .container {
-      grid-template: auto 1fr auto / auto; /* Single column layout */
+    header, footer {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+  
+    main {
+      padding: 1rem;
     }
   }
