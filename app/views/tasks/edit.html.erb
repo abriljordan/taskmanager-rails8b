@@ -1,0 +1,60 @@
+<%= link_to("Back to List", tasks_path, class: 'back-link') %>
+
+<div class="tasks <%= @task.new_record? ? 'new' : 'edit' %> mt-4">
+  <h2 class="text-2xl font-bold"><%= @task.new_record? ? 'New Task' : 'Edit Task' %></h2>
+
+  <%= form_for(@task) do |f| %>
+    <table summary="Task form fields" class="mt-4">
+      <tr>
+        <th>Name</th>
+        <td><%= f.text_field(:name, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Position</th>
+        <td><%= f.text_field(:position, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Completed</th>
+        <td><%= f.check_box(:completed) %></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><%= f.text_area(:description, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Category</th>
+        <td>
+          <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a Category' }, class: 'border border-gray-300 rounded w-full p-2') %>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Tag Selection -->
+    <div class="form-group mt-4">
+      <%= f.label :tag_ids, "Tags", class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+        <div class="mb-2">
+          <%= b.check_box %>
+          <%= b.label(class: "ml-2") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- User Assignment Section -->
+    <div class="form-group mt-4">
+      <%= f.label :user_ids, "Assign Users", class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :email, checked: @task.user_ids do |b| %>
+        <div>
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Form Submission -->
+    <div class="form-buttons mt-4">
+      <%= f.submit(@task.new_record? ? "Create Task" : "Edit Task", class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') %>
+    </div>
+
+  <% end %>
+</div>

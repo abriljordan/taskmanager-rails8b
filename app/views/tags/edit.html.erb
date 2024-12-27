@@ -1,0 +1,19 @@
+<h1>Edit Tag</h1>
+
+<%= form_with model: @tag, local: true do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 3, cols: 50 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update Tag" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', tags_path %>

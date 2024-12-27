@@ -1,0 +1,67 @@
+<%= link_to("Back to List", tasks_path, class: 'back-link') %>
+
+<div class="tasks new mt-4">
+  <h2 class="text-2xl font-bold mb-4">Create Task</h2>
+
+  <%= form_for(@task) do |f| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation" class="mb-4">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <table summary="Task form fields" class="mb-4">
+      <tr>
+        <th>Name</th>
+        <td><%= f.text_field(:name, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Position</th>
+        <td><%= f.text_field(:position, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Completed</th>
+        <td><%= f.check_box(:completed) %></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><%= f.text_area(:description, class: 'border border-gray-300 rounded w-full p-2') %></td>
+      </tr>
+      <tr>
+        <th>Category</th>
+        <td>
+          <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a Category' }, class: 'border border-gray-300 rounded w-full p-2') %>
+        </td>
+      </tr>
+    </table>
+
+    <div class="form-group mb-4">
+      <%= f.label :tag_ids, "Tags", class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+        <div class="mb-2">
+          <%= b.check_box %>
+          <%= b.label(class: "ml-2") %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group mt-4">
+      <%= f.label :user_ids, "Assign Users", class: "block text-gray-700 font-bold mb-2" %>
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :email do |b| %>
+        <div>
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-buttons">
+      <%= f.submit("Create Task", class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') %>
+    </div>
+  <% end %>
+</div>

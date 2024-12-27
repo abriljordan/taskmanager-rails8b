@@ -1,0 +1,32 @@
+<h1>Tasks for Tag: <%= @tag.name %></h1>
+
+<div>
+  <% if @tasks.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Completed</th>
+          <th>Assigned Users</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td><%= link_to task.name, task_path(task) %></td>
+            <td><%= completed_status(task.completed?) %></td>
+            <td>
+              <% if task.assigned_users.any? %>
+                <%= task.assigned_users.map(&:email).join(", ") %>
+              <% else %>
+                No users assigned.
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No tasks assigned to this tag.</p>
+  <% end %>
+</div>

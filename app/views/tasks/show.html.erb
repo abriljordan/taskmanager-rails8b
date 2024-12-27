@@ -1,0 +1,63 @@
+<%= link_to("Back to Task", tasks_path, class: 'back-link') %>
+
+<div class="tasks show">
+  <h2 class="text-xl font-bold">Show Task</h2>
+
+  <div class="actions mb-4">
+    <%= link_to('Edit', edit_task_path(@task), class: 'text-blue-500') %>
+    <%= link_to('Delete', delete_task_path(@task), class: 'text-red-500') %>
+  </div>
+
+  <table class="min-w-full border-collapse border border-gray-200" summary="Task detail view">
+    <tbody>
+      <tr class="border-b">
+        <th class="text-left p-2">Name</th>
+        <td class="p-2"><%= @task.name %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Position</th>
+        <td class="p-2"><%= @task.position %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Completed</th>
+        <td class="p-2"><%= completed_status(@task.completed?) %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Description</th>
+        <td class="p-2"><%= @task.description %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Category</th>
+        <td class="p-2"><%= @task.category ? @task.category.name : 'N/A' %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Created</th>
+        <td class="p-2"><%= @task.created_at.strftime("%B %d, %Y") %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Updated</th>
+        <td class="p-2"><%= @task.updated_at.strftime("%B %d, %Y") %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Tags</th>
+        <td class="p-2">
+          <% if @task.tags.any? %>
+            <%= @task.tags.map { |tag| link_to(tag.name, tag_path(tag), class: "text-blue-500 underline") }.join(", ").html_safe %>
+          <% else %>
+            No tags assigned.
+          <% end %>
+        </td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Assigned Users</th>
+        <td class="p-2">
+          <% if @task.users.any? %>
+            <%= @task.users.map { |user| user.email }.join(", ") %>
+          <% else %>
+            No users assigned.
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

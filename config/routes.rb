@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # get "home/index", to: "home#index"
   # Add the users resource explicitly first to give it higher priority
   resources :users, only: [ :new, :create ]
-
+  resources :tasks
+  resources :tags
+  resources :categories
   # Custom route for sign-up with a friendly URL
   get "signup", to: "users#new", as: :signup
 

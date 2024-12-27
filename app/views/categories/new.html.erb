@@ -1,0 +1,26 @@
+<h1>New Category</h1>
+
+<%= link_to "Back to Categories", categories_path %>
+
+<div class="category new">
+  <%= form_for @category do |f| %>
+    <div class="mb-4">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :position %>
+      <%= f.number_field :position %>
+    </div>
+
+    <div class="form-buttons">
+      <%= f.submit "Create Category" %>
+    </div>
+  <% end %>
+</div>

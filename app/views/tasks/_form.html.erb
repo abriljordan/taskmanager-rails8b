@@ -1,0 +1,36 @@
+<table summary="Task form fields">
+  <tr>
+    <th>Name</th>
+    <td><%= f.text_field(:name, class: 'border border-gray-300 rounded w-full p-2') %></td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <td><%= f.text_field(:position, class: 'border border-gray-300 rounded w-full p-2') %></td>
+  </tr>
+  <tr>
+    <th>Completed</th>
+    <td><%= f.check_box(:completed) %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= f.text_area(:description, class: 'border border-gray-300 rounded w-full p-2') %></td>
+  </tr>
+  <tr>
+    <th>Category</th>
+    <td>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a Category' }, class: 'border border-gray-300 rounded w-full p-2') %>
+    </td>
+  </tr>
+</table>
+
+
+<div class="form-group">
+  <%= f.label :tag_ids, "Tags", class: "block text-gray-700 font-bold mb-2" %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+    <div class="mb-2">
+      <%= b.check_box %>
+      <%= b.label(class: "ml-2") %>
+    </div>
+  <% end %>
+</div>
+

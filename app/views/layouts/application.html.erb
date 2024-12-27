@@ -23,8 +23,48 @@
   </head>
 
   <body>
-    <main>
-      <%= yield %>
-    </main>
+
+    <% if Current.user %>
+     <div class="container">
+        <header>
+          <div>
+          <p>Welcome, <%= Current.user.email_address %> </p>  
+          <%= button_to "Logout", session_path, method: :delete %>
+          </div>
+        </header>
+
+        <nav>
+          <ul>
+            <li><%= link_to 'Dashboard', root_path %> </li>
+            <li><%= link_to 'Tasks', tasks_path %> </li>
+            <li><%= link_to 'Categories', categories_path %> </li>
+            <li><%= link_to 'Tags', tags_path %> </li>
+          </ul>
+        </nav>
+
+        <main>
+          <%= yield %>
+        </main>
+        
+         <aside>
+          <h3>Tags</h3>
+          <ul>
+            <li>TAGS</li>
+          </ul> 
+        </aside>
+
+        <footer>
+            <p>&copy; <%= Time.current.year %> Task Manager. All rights reserved.</p>
+            <div>
+              <a href="https://facebook.com" target="_blank">Facebook</a>
+              <a href="https://twitter.com" target="_blank">Twitter</a>
+              <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+        </footer>
+        
+      <% else %>
+          <%= yield %>
+      <% end %>
+      </div>
   </body>
 </html>

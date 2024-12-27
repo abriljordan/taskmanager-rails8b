@@ -1,33 +1,16 @@
+<h1 class="text-4xl font-bold mb-4">Dashboard</h1>
+<p>Welcome to the Task Manager!</p>
 
-      <div class="container">
-        <header>
-          <div>
-          <p>Welcome, <%= Current.user.email_address %> </p>  
-          <%= button_to "Logout", session_path, method: :delete %>
-          </div>
-        </header>
+<div class="task-summary">
+  <h2 class="text-xl font-semibold">Tasks Summary</h2>
+  <p>Total Tasks: </p>
+  <p>Completed Tasks:</p>
+  <p>Incomplete Tasks: </p>
+</div>
 
-        <nav>
-          <ul>
-            <li><%= link_to 'Dashboard', '#' %> </li>
-            <li><%= link_to 'Tasks', '#' %> </li>
-            <li><%= link_to 'Categories', '#' %> </li>
-            <li><%= link_to 'Tags', '#' %> </li>
-          </ul>
-        </nav>
+<div class="user-summary">
+  <h2 class="text-xl font-semibold">Users Summary</h2>
+  <p>Total Users:</p>
+</div>
 
-         <aside>
-          <h3>Tags</h3>
-          <ul>
-            <li>TAGS</li>
-          </ul> 
-        </aside>
-
-        <footer>
-            <p>&copy; <%= Time.current.year %> Task Manager. All rights reserved.</p>
-            <div>
-              <a href="https://facebook.com" target="_blank">Facebook</a>
-              <a href="https://twitter.com" target="_blank">Twitter</a>
-              <a href="https://instagram.com" target="_blank">Instagram</a>
-            </div>
-        </footer>
+<!-- Add additional content here -->

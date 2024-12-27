@@ -1,0 +1,49 @@
+<%# app/views/tasks/index.html.erb %>
+<div class="tasks index">
+  <h2 class="text-2xl font-bold">Tasks</h2>
+
+  <div class="mb-4">
+    <%= link_to("Add New Task", new_task_path, class: 'action new bg-green-500 text-white px-4 py-2 rounded') %>
+  </div>
+
+  <!-- Search Form -->
+  <%= form_with(url: tasks_path, method: :get, local: true) do |form| %>
+    <div class="mb-4 flex">
+      <%= form.label :search, "Search Tasks", class: "block text-gray-700 mr-2" %>
+      <%= form.text_field :search, value: params[:search], class: "mt-1 block w-full border-gray-300 rounded-md" %>
+      <%= form.submit "Search", class: "ml-2 bg-blue-500 text-white rounded px-4 py-2" %>
+    </div>
+  <% end %>
+
+  <table class="min-w-full border-collapse border border-gray-200" summary="Task list">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="text-left p-2">#</th>
+        <th class="text-left p-2">Task</th>
+        <th class="text-left p-2">Completed</th>
+        <th class="text-left p-2">Category</th>
+        <th class="text-left p-2">Assigned Users</th>
+        <th class="text-left p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each_with_index do |task, index| %>
+        <tr class="border-b">
+          <td><%= index + 1 %></td>
+          <td><%= link_to(task.name, task_path(task)) %></td>
+          <td><%= task.category ? task.category.name : 'N/A' %></td>
+          <td>
+            <% if task.users.any? %>
+              <%= task.users.map { |user| user.email }.join(", ") %>
+            <% else %>
+              No users assigned.
+            <% end %>
+          </td>
+          <td class="p-2">
+            <%= link_to 'Edit', edit_task_path(task) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

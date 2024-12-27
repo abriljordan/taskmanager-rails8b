@@ -1,0 +1,35 @@
+<%= link_to("Back to Categories", categories_path) %>
+
+<div class="categories show">
+  <h2>Show Category</h2>
+
+  <div>
+    <%= link_to 'Edit', edit_category_path(@category) %>
+    <%= link_to 'Delete', delete_category_path(@category), method: :delete, data: { confirm: 'Are you sure you want to permanently delete this category?' } %>
+  </div>
+
+  <table summary="Category detail view">
+    <tbody>
+      <tr class="border-b">
+        <th class="text-left p-2">Name</th>
+        <td class="p-2"><%= @category.name %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Description</th>
+        <td class="p-2"><%= @category.description %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Position</th>
+        <td class="p-2"><%= @category.position %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Created</th>
+        <td class="p-2"><%= @category.created_at.strftime("%B %d, %Y") %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="text-left p-2">Updated</th>
+        <td class="p-2"><%= @category.updated_at.strftime("%B %d, %Y") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
