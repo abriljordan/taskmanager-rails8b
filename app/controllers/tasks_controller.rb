@@ -20,8 +20,9 @@ class TasksController < ApplicationController
   end
 
   def new
-    @count = Task.count
-    @task = Task.new(position: @count + 1)
+    #    @count = Task.count
+    #   @task = Task.new(position: @count + 1)
+    @task = Task.new
   end
 
   def create
@@ -77,6 +78,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :completed, :category_id, :position, tag_ids: [], user_ids: [])
+    params.require(:task).permit(:name, :description, :completed, :category_id, tag_ids: [], user_ids: [])
   end
 end

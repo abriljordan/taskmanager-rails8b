@@ -14,10 +14,7 @@
         <th class="text-left p-2">Name</th>
         <td class="p-2"><%= @task.name %></td>
       </tr>
-      <tr class="border-b">
-        <th class="text-left p-2">Position</th>
-        <td class="p-2"><%= @task.position %></td>
-      </tr>
+
       <tr class="border-b">
         <th class="text-left p-2">Completed</th>
         <td class="p-2"><%= completed_status(@task.completed?) %></td>

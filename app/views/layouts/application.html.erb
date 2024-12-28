@@ -24,11 +24,14 @@
 
   <body>
 
+  <%= tag.div(flash[:alert], class: 'alert') if flash[:alert] %>
+  <%= tag.div(flash[:notice], class: 'notice') if flash[:notice] %>
+
     <% if Current.user %>
      <div class="container">
         <header>
           <div>
-          <p>Welcome, <%= Current.user.email_address %> </p>  
+          <h5>Welcome, <%= Current.user.email_address %> </h5>  
           <%= button_to "Logout", session_path, method: :delete %>
           </div>
         </header>

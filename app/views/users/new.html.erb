@@ -2,6 +2,9 @@
 <div class="session-container">
   <h1>Sign Up</h1>
 
+  <%= tag.div(flash[:alert], class: 'alert') if flash[:alert] %>
+  <%= tag.div(flash[:notice], class: 'notice') if flash[:notice] %>
+  
   <%= form_with(model: @user, local: true, html: { class: 'sign-up-form' }) do |f| %>
     <div class="form-group">
       <%= f.email_field :email_address, required: true,  placeholder: "Enter your email address" %>

@@ -11,12 +11,10 @@ class Task < ApplicationRecord
 
   # Validations
   validates :name, presence: true, length: { maximum: 50 }
-  validates :position, presence: true, numericality: { greater_than: 0 }
   validate :description_has_no_prohibited_words
 
   # Callbacks
   before_validation :titleize_name, unless: :skip_titleize_name
-  before_validation :set_default_position, if: -> { position.blank? || position < 1 }
   before_create :log_create
   before_update :log_update
   after_save :log_save
@@ -25,7 +23,6 @@ class Task < ApplicationRecord
   # Scopes
   scope :complete, -> { where(completed: true) }
   scope :incomplete, -> { where(completed: false) }
-  scope :sorted, -> { order(:position) }
   scope :search, ->(kw) { where("LOWER(name) LIKE ?", "%#{kw.downcase}%") }
 
   private
@@ -45,12 +42,6 @@ class Task < ApplicationRecord
   # Titleize the name before saving
   def titleize_name
     self.name = name.titleize
-  end
-
-  # Set the default position if not provided
-  def set_default_position
-    max_position = Task.maximum(:position) || 0
-    self.position = max_position + 1
   end
 
   # Logging methods

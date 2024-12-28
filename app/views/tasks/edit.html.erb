@@ -9,10 +9,7 @@
         <th>Name</th>
         <td><%= f.text_field(:name, class: 'border border-gray-300 rounded w-full p-2') %></td>
       </tr>
-      <tr>
-        <th>Position</th>
-        <td><%= f.text_field(:position, class: 'border border-gray-300 rounded w-full p-2') %></td>
-      </tr>
+
       <tr>
         <th>Completed</th>
         <td><%= f.check_box(:completed) %></td>
@@ -43,7 +40,7 @@
     <!-- User Assignment Section -->
     <div class="form-group mt-4">
       <%= f.label :user_ids, "Assign Users", class: "block text-gray-700 font-bold mb-2" %>
-      <%= f.collection_check_boxes :user_ids, User.all, :id, :email, checked: @task.user_ids do |b| %>
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :email_address, checked: @task.user_ids do |b| %>
         <div>
           <%= b.check_box %>
           <%= b.label %>

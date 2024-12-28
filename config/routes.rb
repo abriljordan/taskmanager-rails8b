@@ -5,6 +5,19 @@ Rails.application.routes.draw do
   resources :tasks
   resources :tags
   resources :categories
+
+  resources :categories do
+    member do
+      get :delete
+    end
+  end
+
+  resources :tasks do
+    member do
+      get :delete
+    end
+  end
+
   # Custom route for sign-up with a friendly URL
   get "signup", to: "users#new", as: :signup
 

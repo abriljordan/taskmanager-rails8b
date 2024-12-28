@@ -3,9 +3,9 @@
 <div class="categories delete">
   <h2>Delete Category</h2>
 
-  <%= form_for(@category, method: :delete) do |f| %>
+  <%= form_with(model: @category, method: :delete) do |f| %>
     <p>Are you sure you want to permanently delete this category?</p>
-    <p ><%= @category.name %></p>
+    <p><%= @category.name %></p>
 
     <div class="form-buttons">
       <%= f.submit("Delete Category") %>

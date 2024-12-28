@@ -30,7 +30,7 @@
     color: #ffffff; /* White text for contrast */
     padding: 1rem;
     grid-column: 1 / 4; /* Spans all three columns */
-    text-align: center;
+    text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
@@ -107,6 +107,24 @@
     color: #2a9d8f; /* Hover color for links */
   }
   
+  .alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .notice {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .container {
